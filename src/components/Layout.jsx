@@ -262,8 +262,8 @@ export function Layout() {
             ?
           </button>
 
-          {/* Bell — desktop only */}
-          <button
+          {/* Bell — desktop only, hidden on browsers without Notification API (e.g. iOS Safari) */}
+          {typeof Notification !== 'undefined' && <button
             onClick={() => {
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission()
@@ -284,7 +284,7 @@ export function Layout() {
                 <path d="M6.5 13.5a1.5 1.5 0 003 0" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
               </svg>
             )}
-          </button>
+          </button>}
 
           {/* Theme picker */}
           <div className="relative" ref={themeRef}>

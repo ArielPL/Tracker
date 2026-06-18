@@ -6,6 +6,8 @@ export function useNotifications() {
   const timersRef = useRef([])
 
   useEffect(() => {
+    if (typeof Notification === 'undefined') return
+
     if (Notification.permission === 'default') {
       Notification.requestPermission()
     }
