@@ -262,14 +262,14 @@ export function Layout() {
             ?
           </button>
 
-          {/* Bell — desktop only, hidden on browsers without Notification API (e.g. iOS Safari) */}
+          {/* Bell — visible on all platforms that support Notification API (incl. iOS PWA) */}
           {typeof Notification !== 'undefined' && <button
             onClick={() => {
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission()
               }
             }}
-            className="header-desktop-only w-7 h-7 flex items-center justify-center rounded text-coal hover:text-ash hover:bg-liner transition-colors"
+            className="w-7 h-7 flex items-center justify-center rounded text-coal hover:text-ash hover:bg-liner transition-colors"
             title={Notification.permission === 'granted' ? 'Notifications enabled' : 'Enable notifications'}
             aria-label="Notifications"
           >
