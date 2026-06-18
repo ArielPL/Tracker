@@ -378,7 +378,7 @@ export function AddModal() {
     >
       <div
         className="modal-sheet w-full max-w-md rounded-2xl p-6 overflow-y-auto"
-        style={{ background: 'var(--color-surface2)', border: '1px solid var(--color-liner)', maxHeight: '92dvh' }}
+        style={{ background: 'var(--color-surface2)', border: '1px solid var(--color-liner)', maxHeight: 'min(92dvh, 92vh)' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
