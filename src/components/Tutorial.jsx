@@ -5,6 +5,11 @@ const STEPS = [
     body: 'Your personal planner for tasks, goals, and reflections. Everything stays private on your device.',
   },
   {
+    emoji: '📲',
+    title: 'Add to your home screen',
+    body: 'For the best experience — including notifications — add Tracker to your home screen. In Safari, tap Share → "Add to Home Screen". On desktop, look for the install icon in your browser bar.',
+  },
+  {
     emoji: '📅',
     title: 'Four views',
     body: 'Switch between Day, Week, Month, and Year using the tabs at the top — or press D, W, M, Y on your keyboard.',
