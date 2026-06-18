@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+/* ── Base design tokens (Obsidian theme) ── */
+@theme {
+  --color-bg:       #0e0e10;
+  --color-surface:  #141416;
+  --color-surface2: #161618;
+  --color-panel:    #111113;
+  --color-liner:    #1e1e22;
+  --color-gold:     #e8c97a;
+  --color-sage:     #4caf7d;
+  --color-sky:      #7a9ee8;
+  --color-snow:     #f0f0f0;
+  --color-ash:      #888888;
+  --color-coal:     #444444;
+  --color-sand:     #c9a84c;
+  --color-grape:    #a07ae8;
+
+  --font-display: Georgia, serif;
+  --font-sans: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+}
+
+/* ── Themes (override base tokens at runtime) ── */
+
+/* Light — warm paper tones, amber accent */
+html[data-theme="light"] {
+  --color-bg:       #f5f4ef;
+  --color-surface:  #ffffff;
+  --color-surface2: #eeecea;
+  --color-panel:    #edecea;
+  --color-liner:    #dddbd3;
+  --color-gold:     #9a6c10;
+  --color-snow:     #1e1c18;
+  --color-ash:      #56534a;
+  --color-coal:     #a8a49a;
+  --color-sand:     #7d5812;
+  --color-grape:    #5e3fa8;
+  --color-sage:     #2d7a52;
+  --color-sky:      #3a6bbf;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-snow);
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root { height: 100dvh; display: flex; flex-direction: column; }
+
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-liner); border-radius: 2px; }
+
+/* ── Animations ── */
+@keyframes fadeIn    { from { opacity: 0 }               to { opacity: 1 } }
+@keyframes slideUp   { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes backdropIn { from { opacity: 0 }              to { opacity: 1 } }
+
+.fade-in          { animation: fadeIn 180ms ease both; }
+.slide-up         { animation: slideUp 220ms ease both; }
+.modal-backdrop   { animation: backdropIn 150ms ease both; }
+.modal-sheet      { animation: slideUp 220ms cubic-bezier(.16,1,.3,1) both; }
+
+.task-done {
+  text-decoration: line-through;
+  text-decoration-color: var(--color-coal);
+  color: var(--color-coal);
+}
+
+/* ── Range input ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-liner);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  cursor: pointer;
+}
+
+/* ── Undo toast progress bar ── */
+@keyframes undoProgress {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+.undo-progress {
+  animation: undoProgress 4s linear forwards;
+}
+
+/* ── Mobile overrides (max-width: 640px) ── */
+@media (max-width: 640px) {
+  /* ── Header: hide desktop-only controls, prevent overflow ── */
+  .header-desktop-only {
+    display: none !important;
+  }
+
+  /* ── Canvas: tighter padding on mobile ── */
+  .canvas-pad {
+    padding: 16px !important;
+  }
+
+  /* ── Canvas header row: allow title to shrink, copy btn compact ── */
+  .canvas-header-row {
+    gap: 4px !important;
+  }
+  .copy-btn-label {
+    display: none;
+  }
+  .copy-btn-icon {
+    display: flex;
+  }
+
+  /* ── Task row: always show action buttons on touch ── */
+  .task-actions {
+    opacity: 1 !important;
+  }
+
+  /* ── Task row: enlarge checkbox touch target ── */
+  .task-checkbox-wrap {
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0 !important;
+    flex: none;
+  }
+
+  /* ── Filter bar: horizontal scroll instead of wrap ── */
+  .filter-bar {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+  }
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Wheel section arrows: bigger tap target ── */
+  .wheel-arrow {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* ── Mobile drawer: wheel items bigger ── */
+  .wheel-item {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  /* ── Drag handle: hide on mobile (no drag-and-drop on touch) ── */
+  .drag-handle {
+    display: none !important;
+  }
+
+  /* ── Bottom tab bar: safe area inset ── */
+  .bottom-tab-bar {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 4px);
+    height: auto;
+    min-height: 56px;
+  }
+
+  /* ── Canvas: tighter section spacing ── */
+  .canvas-section {
+    margin-bottom: 20px !important;
+  }
+
+  /* ── Canvas: tighter header margin ── */
+  .canvas-header {
+    margin-bottom: 16px !important;
+  }
+
+  /* ── Task row: ensure minimum row height for touch ── */
+  .task-row-inner {
+    min-height: 44px;
+  }
+
+  /* ── Quick add input row: taller touch area ── */
+  .quick-add-row {
+    min-height: 40px;
+  }
+}
