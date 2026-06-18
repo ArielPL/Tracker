@@ -252,10 +252,10 @@ export function Layout() {
             </svg>
           </button>
 
-          {/* Tutorial help — desktop only */}
+          {/* Tutorial help */}
           <button
             onClick={() => { setTutorialStep(0); setShowTutorial(true) }}
-            className="header-desktop-only w-7 h-7 flex items-center justify-center rounded text-coal hover:text-ash hover:bg-liner transition-colors text-[12px] font-medium"
+            className="w-7 h-7 flex items-center justify-center rounded text-coal hover:text-ash hover:bg-liner transition-colors text-[12px] font-medium"
             title="Help / tutorial"
             aria-label="Help"
           >
